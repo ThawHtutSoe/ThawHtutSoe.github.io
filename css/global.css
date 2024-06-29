@@ -1,12 +1,19 @@
+
 table {
-    width: 30vw;
+    width: 30%;
 }
+
 table tr:nth-child(even) {
-    background-color: #90c4ec;
+    background-color: #b8adad;
 }
 
 table tr:nth-child(odd) {
-    background-color: #dce9de;
+    background-color: #ffffff;
+}
+
+table th {
+    background-color: #a9c6c8;
+    color: rgb(5, 1, 1);
 }
 
 table tfoot {
