@@ -1,18 +1,17 @@
-
 table {
     width: 30%;
 }
 
 table tr:nth-child(even) {
-    background-color: #b8adad;
+    background-color: #e7d6d6;
 }
 
 table tr:nth-child(odd) {
-    background-color: #ffffff;
+    background-color: #f7efef;
 }
 
 table th {
-    background-color: #a9c6c8;
+    background-color: #aad2d4;
     color: rgb(5, 1, 1);
 }
 
