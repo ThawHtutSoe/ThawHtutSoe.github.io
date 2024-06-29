@@ -61,8 +61,8 @@
             var accessorySelect = $("#accessory");
             var accessoryOption = accessorySelect.find(":selected");
             var accessoryName = accessoryOption.text();
-            var accessoryPrice = parseFloat(accessoryOption.val());
-            var amount = parseInt($("#amount").val());
+            var accessoryPrice = accessoryOption.val();
+            var amount = $("#amount").val();
         
             var productPrice = accessoryPrice * amount;
             totalPrice += productPrice;
@@ -71,7 +71,7 @@
             var newRow = $("<tr>");
             var accessoryCell = $("<td>").text(accessoryName);
             var amountCell = $("<td>").text(amount);
-            var priceCell = $("<td>").text(productPrice.toFixed(2));
+            var priceCell = $("<td>").text(productPrice);
 
             newRow.append(accessoryCell, amountCell, priceCell);
 
