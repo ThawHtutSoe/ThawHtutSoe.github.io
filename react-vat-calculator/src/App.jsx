@@ -61,7 +61,7 @@ function App() {
         onChange={handlePrice}
         style={{ fontSize: '20pt' }} />
       
-      <h2>Discount</h2>
+      <h2>Discount Price</h2>
       <input type="number" 
         onChange={handleDiscount}
         style={{ fontSize: '20pt' }} />
