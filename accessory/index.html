@@ -4,10 +4,40 @@
     <title>Car Accessories</title>
     <link rel="stylesheet" href="/css/global.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            var totalPrice = 0;
+            var vatAmount = 0;
 
+            function addToProductList() {
+                var accessorySelect = $("#accessory");
+                var accessoryOption = accessorySelect.find(":selected");
+                var accessoryName = accessoryOption.text();
+                var accessoryPrice = accessoryOption.val();
+                var amount = $("#amount").val();
+
+                var productPrice = accessoryPrice * amount;
+                totalPrice += productPrice;
+                vatAmount += productPrice * 0.07;
+
+                var newRow = $("<tr>");
+                var accessoryCell = $("<td>").text(accessoryName);
+                var amountCell = $("<td>").text(amount);
+                var priceCell = $("<td>").text(productPrice.toFixed(2));
+
+                newRow.append(accessoryCell, amountCell, priceCell);
+
+                $("#productList").append(newRow);
+
+                $("#totalPrice").text(totalPrice.toFixed(2));
+                $("#vatAmount").text(vatAmount.toFixed(2));
+                $("#netPrice").text((totalPrice + vatAmount).toFixed(2));
+            }
+
+            $("#addButton").click(addToProductList);
+        });
+    </script>
 </head>
-</head>
- 
 <body>
     <h1>Car Accessories</h1>
     
@@ -23,7 +53,7 @@
         <label for="amount">Amount:</label>
         <input type="number" id="amount" min="1" value="1">
         <br>
-        <button type="button" onclick="addToProductList()">Add</button>
+        <button type="button" id="addButton">Add</button>
     </form>
  
     <table>
@@ -52,37 +82,5 @@
             </tr>
         </tfoot>
     </table>
- 
-    <script>
-        var totalPrice = 0;
-        var vatAmount = 0;
-    
-        function addToProductList() {
-            var accessorySelect = $("#accessory");
-            var accessoryOption = accessorySelect.find(":selected");
-            var accessoryName = accessoryOption.text();
-            var accessoryPrice = accessoryOption.val();
-            var amount = $("#amount").val();
-        
-            var productPrice = accessoryPrice * amount;
-            totalPrice += productPrice;
-            vatAmount += productPrice * 0.07;
-        
-            var newRow = $("<tr>");
-            var accessoryCell = $("<td>").text(accessoryName);
-            var amountCell = $("<td>").text(amount);
-            var priceCell = $("<td>").text(productPrice);
-
-            newRow.append(accessoryCell, amountCell, priceCell);
-
-            $("#productList").append(newRow);
-        
-            $("#totalPrice").text(totalPrice.toFixed(2));
-            $("#vatAmount").text(vatAmount.toFixed(2));
-            $("#netPrice").text((totalPrice + vatAmount).toFixed(2));
-        }
-        
-    </script>
-    
 </body>
 </html>
