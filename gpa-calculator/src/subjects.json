@@ -1,0 +1,45 @@
+{
+    "subjects": [
+      {
+        "code": "MATH101",
+        "name": "Calculus I"
+      },
+      {
+        "code": "ENG102",
+        "name": "English Literature"
+      },
+      {
+        "code": "CS103",
+        "name": "Introduction to Programming"
+      },
+      {
+        "code": "HIST104",
+        "name": "World History"
+      },
+      {
+        "code": "BIO105",
+        "name": "Biology"
+      },
+      {
+        "code": "CHEM106",
+        "name": "Chemistry"
+      },
+      {
+        "code": "PHYS107",
+        "name": "Physics"
+      },
+      {
+        "code": "ECON108",
+        "name": "Economics"
+      },
+      {
+        "code": "PSY109",
+        "name": "Psychology"
+      },
+      {
+        "code": "PHIL110",
+        "name": "Philosophy"
+      }
+    ]
+  }
+  
