@@ -1,42 +1,69 @@
 import React from 'react';
-import { Table, Button } from 'react-bootstrap';
-import 'bootstrap-icons/font/bootstrap-icons.css';
+import Table from 'react-bootstrap/Table';
+import Container from 'react-bootstrap/Container';
+import { Button } from 'react-bootstrap';
+import { TotalPriceContext } from '../context.jsx';
+import { useEffect } from 'react';
 
-const DataTable = ({ data, onDelete, onSort }) => {
+const DataTable = ({ data, onDelete, onFilter }) => {
+
+
+    const { totalPrice, setTotalPrice } = React.useContext(TotalPriceContext)
+    let sum = 0
+    // console.table(data)
+
+    // This will be executed once after the compoent is rendered.
+    useEffect(() => {
+        if (data)
+            sum = data.reduce((acc, item) => acc + item.price * item.quantity, 0)
+        setTotalPrice(sum)
+    })
+
+    const sRef = React.useRef()
+    const handleDelete = (index) => {
+        console.debug('Delete', index)
+        onDelete(index)
+        // data.splice(index, 1)
+        // console.table(data  )
+    }
+
+    const handleSearch = () => {
+        const keyword = sRef.current.value
+        console.log('Search', keyword)
+        onFilter(keyword)
+    }
+
     return (
-        <div>
-            <div className="my-3 d-flex align-items-center">
-                <Button onClick={() => onSort('asc')} variant="primary" className="ms-2">
-                    <i className="bi bi-arrow-up"></i> {/* Up arrow for ascending */}
-                </Button>
-                <Button onClick={() => onSort('desc')} variant="primary" className="ms-2">
-                    <i className="bi bi-arrow-down"></i> {/* Down arrow for descending */}
-                </Button>
-            </div>
-
-            <Table striped bordered hover>
+        <Container>
+            <input type="text" placeholder="Search..." ref={sRef} />{' '}
+            <Button onClick={handleSearch}
+                variant="outline-dark">
+                <i className="bi bi-search"></i> Search
+            </Button>
+            <Table className="table table-striped border dark">
                 <thead>
                     <tr>
-                        <th>Action</th>
-                        <th>Product Name</th>
-                        <th>Price</th>
-                        <th>Qty</th>
+                        <th style={{ textAlign: 'center' }}>-</th>
+                        <th style={{ textAlign: 'center' }}>Name</th>
+                        <th style={{ textAlign: 'center' }}>Price</th>
+                        <th style={{ textAlign: 'center' }}>Quantity</th>
                     </tr>
                 </thead>
                 <tbody>
                     {data.map((item, index) => (
                         <tr key={index}>
-                            <td>
-                                <i className="bi bi-trash" onClick={() => onDelete(index)} style={{ cursor: 'pointer' }}></i> {/* Trash icon */}
+                            <td style={{ textAlign: 'center' }}>
+                                <i className="bi bi-trash"
+                                    onClick={() => handleDelete(index)}></i>
                             </td>
                             <td>{item.name}</td>
-                            <td>{item.price}</td>
-                            <td>{item.qty}</td>
+                            <td style={{ textAlign: 'center' }}>${item.price.toFixed(2)}</td>
+                            <td style={{ textAlign: 'center' }}>{item.quantity}</td>
                         </tr>
                     ))}
                 </tbody>
             </Table>
-        </div>
+        </Container>
     );
 };
 
